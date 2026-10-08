@@ -3,7 +3,6 @@ An embedded device that measures barbell orientation using an MPU-6050 IMU and S
 
 (INSERT PICTURE OF THE FINAL DEVICE HERE)
 
-
 ## FEATURES
 - Real-time barbell orientation measurement
 - MPU-6050 IMU with accelerometer and gyroscope
@@ -16,7 +15,6 @@ An embedded device that measures barbell orientation using an MPU-6050 IMU and S
 ## DEMONSTRATION
 ### VIDEO
 (INSERT DEMO VIDEO HERE)
-
 
 ## HARDWARE
 |COMPONENT|MODEL|PURPOSE|
@@ -34,7 +32,6 @@ The MPU-6050 IMU and the display module are connected to the STM32 board using I
 For the calibration button, a simple momentary switch was wired up to the STM32 using a GPIO input pin.
 
 To power the device, a bank of 6 AAA batteries were wired in series, to provide 9V DC power to the device. Since the STM32 can accept a range of 7V-12V on its VIN pin, 9V provides sufficient power to fall within this range, while not being unnecessarily heavy. AAA batteries are compact, cheap and easy to swap, making them a reasonable choice.  
-
 
 ## SOFTWARE
 
@@ -90,24 +87,38 @@ The device features a momentary switch (button) on the side to "calibrate" it, o
 
 ### WHY CALIBRATION IS NECESSARY
 
-There are several reasons why a calibration function is necessary, instead of just setting some specific values for the initial acceleration and gyroscope values. Firstly, there is no guarantee that the barbell is actually straight. If the barbell is worn or has a lot of weight on it, and the device is not perfectly in the center, it might not start perfectly level. Secondly, if the device is being used on a grip other than a standard straight barbell, such as a curl bar, the device might not actually be level with the ground when the barbell is, meaning that some adjustment would be necessary.
+There are several reasons why a calibration function is necessary, instead of just setting some specific values for the initial acceleration and gyroscope values. Firstly, there is no guarantee that the barbell is actually straight. If the barbell is worn or has a lot of weight on it, and the device is not perfectly in the center, it might not start perfectly level. Secondly, if the device is being used on a grip other than a standard straight barbell, such as a curl bar, the device might not actually be level with the ground when the barbell is, meaning that some adjustment would be necessary. Lastly, it is not guaranteed (and likely not possible) that the IMU is mounted perfectly level within the enclosure, meaning that if a set value were used for the intial measurements, they could vary from what they would actually be if the device was level.
 
 ## WIRING/PINOUT
 
 ### SCHEMATIC
-[ADD A SCHEMATIC HERE]
+![Schematic](Schematic.png)
 
 ### PINOUT
 
-|ST Morpho Pin|Function|
-|---|---|
+|ST Morpho Pin|Protocol|Function|
+|---|---|---|
+|CN7 Pin 14|Reset|Display Reset|
+|CN7 Pin 16|Power|3V Power Out|
+|CN7 Pin 18|Power|5V Power Out|
+|CN7 Pin 20|Power|Ground|
+|CN7 Pin 22|Power|Ground|
+|CN7 Pin 24|Power|9V Power In|
+|CN7 Pin 34|PWM|Middle LED|
+|CN10 Pin 3|I2C|OLED Display Data|
+|CN10 Pin 5|I2C|OLED Display Clock|
+|CN10 Pin 13|PWM|Right LED|
+|CN10 Pin 15|PWM|Left LED|
+|CN10 Pin 25|I2C|IMU Data|
+|CN10 Pin 31|I2C|IMU Clock|
 
-
-[ADD A PINOUT CHART]
+** It should be noted that the device also has a switch connected to the power jumper that switches the STM32 between USB and VIN power. This switch is omitted from the schematic and pinout because it does not control the function of the device, beyond switching the power source. 
 
 ### PHOTO
-[SHOW A PICTURE OF THE WIRES]
+This is the device's electronics, assembled outside of the enclosure. 
+![Electronics](Electronics.png)
 
+The display, IMU, and LEDs are mounted to a protoyping board, to hold them in place relative to each other, and ensure that all connections stay as they should. The 6 AAA batteries are wired in series on another protoyping board, creating one solid power supply for the device. Jumper wires are used to connect the soldered components on the board to the STM32. 
 
 ## 3D PRINTED ENCLOSURE
 
