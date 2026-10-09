@@ -43,7 +43,13 @@ Interfaces Used: I2C, Timers, PWM, GPIO
 
 Algorithms Used: Madgwick Sensor Fusion Algorithm, IMU Calibration Algorithm
 
-[ADD A BASIC EXPLANATION OF HOW THE SOFTWARE WORKS]
+The software for this project is entirely written in C. There are 5 different source code files that I created, each with their own respective header file:
+- The display.c file contains the necessary functions for displaying text on the SSD1306 OLED, such as creating the display matrix array, updating the display, clearing thd display, etc.
+- The fonts.c file contains the data for the onscreen font, where each letter is represented by a 5x7 grid. Each letter is listed as 5 hexadecimal numbers representing its 5 columns.
+- The imu.c file contains the functions for the IMU, including initializing, calibrating, receiving data, etc.
+- The madgwick.c file contains the procedure for the Madgwick sensor fusion algorithm.
+- The main.c file is what brings all of these source files together, and contains the main operating script for the device.
+Within the STM32CUBEIDE, there were other C files that were generated automatically to help the device function, but those were not included here since I did not write or modify them, and they are largely for background tasks such as initializing the STM32. 
 
 
 ## SYSTEM ARCHITECTURE
@@ -105,6 +111,7 @@ There are several reasons why a calibration function is necessary, instead of ju
 |CN7 Pin 22|Power|Ground|
 |CN7 Pin 24|Power|9V Power In|
 |CN7 Pin 34|PWM|Middle LED|
+|CN7 Pin 36|GPIO|Calibration Button|
 |CN10 Pin 3|I2C|OLED Display Data|
 |CN10 Pin 5|I2C|OLED Display Clock|
 |CN10 Pin 13|PWM|Right LED|
